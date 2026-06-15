@@ -152,7 +152,7 @@ export default function ScreeningCard({ screening: s, index: _i }: { screening: 
       {stage === 'details' && (
         <div style={{ marginTop: 20, borderTop: '1px solid rgba(255,225,0,.12)', paddingTop: 20 }}>
           <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, letterSpacing: 5, color: 'var(--orange)', marginBottom: 16 }}>✦ YOUR DETAILS ✦</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 14 }}>
+          <div className="responsive-grid">
             <div>
               <label style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, color: 'var(--orange)', letterSpacing: 3, marginBottom: 4, display: 'block' }}>FULL NAME *</label>
               <input 
@@ -271,7 +271,7 @@ export default function ScreeningCard({ screening: s, index: _i }: { screening: 
 
           <div style={{ background: 'rgba(24,25,109,.4)', padding: '20px', border: '1px solid rgba(255,225,0,.1)', marginBottom: 20 }}>
             <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, color: 'var(--orange)', letterSpacing: 3, marginBottom: 16 }}>ENTER TRANSACTION DETAILS</p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 16 }}>
+            <div className="responsive-grid">
               <div style={{ gridColumn: '1/-1' }}>
                 <label style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, color: 'var(--orange)', letterSpacing: 3, marginBottom: 4, display: 'block' }}>TRANSACTION ID / UTR NUMBER *</label>
                 <input 
@@ -327,6 +327,7 @@ export default function ScreeningCard({ screening: s, index: _i }: { screening: 
           
           <div 
             ref={ticketRef}
+            className="ticket-container"
             style={{ 
               maxWidth: 600, margin: '0 auto', background: '#e8ddc5', color: '#0a0b35', 
               position: 'relative', border: '1px solid #c0b080', display: 'flex', flexWrap: 'wrap', 
@@ -345,11 +346,11 @@ export default function ScreeningCard({ screening: s, index: _i }: { screening: 
             </div>
 
             {/* Perforated holes */}
-            <div style={{ position:'absolute', left:-8, top:'50%', marginTop:-8, width:16, height:16, borderRadius:'50%', background:'var(--navy-deep)', border:'1px solid #c0b080', zIndex: 2 }} />
-            <div style={{ position:'absolute', right:-8, top:'50%', marginTop:-8, width:16, height:16, borderRadius:'50%', background:'var(--navy-deep)', border:'1px solid #c0b080', zIndex: 2 }} />
+            <div className="ticket-holes-y" style={{ position:'absolute', left:-8, top:'50%', marginTop:-8, width:16, height:16, borderRadius:'50%', background:'var(--navy-deep)', border:'1px solid #c0b080', zIndex: 2 }} />
+            <div className="ticket-holes-y" style={{ position:'absolute', right:-8, top:'50%', marginTop:-8, width:16, height:16, borderRadius:'50%', background:'var(--navy-deep)', border:'1px solid #c0b080', zIndex: 2 }} />
 
             {/* Main Part */}
-            <div style={{ flex: 1, padding: '24px 32px', textAlign: 'left', borderRight: '2px dashed #b0a070', minWidth:300, position:'relative', zIndex: 1 }}>
+            <div className="ticket-main" style={{ flex: 1, padding: 'clamp(20px,4vw,32px)', textAlign: 'left', borderRight: '2px dashed #b0a070', minWidth: 'min(100%, 300px)', position:'relative', zIndex: 1 }}>
               <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start' }}>
                 <p style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 42, margin: 0, lineHeight: 0.9, color: '#222', letterSpacing: 2 }}>KHULA PITARA</p>
                 <div style={{ textAlign:'right' }}>
@@ -387,13 +388,13 @@ export default function ScreeningCard({ screening: s, index: _i }: { screening: 
             </div>
 
             {/* Stub Part */}
-            <div style={{ width: 140, padding: '24px 16px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background:'rgba(0,0,0,0.03)' }}>
+            <div className="ticket-stub" style={{ width: 140, padding: '24px 16px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background:'rgba(0,0,0,0.03)', position: 'relative', zIndex: 1 }}>
               <div style={{ transform: 'rotate(90deg)', whiteSpace: 'nowrap', position: 'relative', width: 120 }}>
                 <p style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 24, color: '#CC3A00', margin:0, letterSpacing:4 }}>ADMIT {qty}</p>
               </div>
               
               {/* Fake barcode */}
-              <div style={{ height: 100, width: 80, display: 'flex', gap: 2, alignItems: 'flex-end', marginTop: 20 }}>
+              <div className="ticket-barcode" style={{ height: 100, width: 80, display: 'flex', gap: 2, alignItems: 'flex-end', marginTop: 20 }}>
                 {Array.from({length:18}).map((_,i) => (
                   <div key={i} style={{ width: Math.random()*4+1, height: '100%', background: '#222' }} />
                 ))}

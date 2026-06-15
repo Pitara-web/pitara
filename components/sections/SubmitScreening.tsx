@@ -192,7 +192,7 @@ export default function SubmitScreeningSection() {
     fontSize: 14, outline: 'none', width: '100%', transition: 'border-color .2s',
   }
   const ERR: React.CSSProperties = { fontFamily: "'Inter',sans-serif", fontSize: 11, color: 'var(--orange)', marginTop: 4 }
-  const gridTwo: React.CSSProperties = { display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 20 }
+  const gridTwo: React.CSSProperties = { display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%, 200px),1fr))', gap: 20 }
 
   return (
     <section ref={sectionRef} id="submit" style={{ background: 'var(--navy-dark)', padding: '80px clamp(16px,5vw,60px)', position: 'relative', overflow: 'hidden' }}>
