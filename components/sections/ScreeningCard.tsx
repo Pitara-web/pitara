@@ -251,42 +251,45 @@ export default function ScreeningCard({ screening: s, index: _i }: { screening: 
       {/* ── STAGE: form — enter transaction details ── */}
       {stage === 'form' && (
         <div style={{ marginTop: 20, borderTop: '1px solid rgba(255,225,0,.12)', paddingTop: 20 }}>
-          <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, letterSpacing: 5, color: 'var(--orange)', marginBottom: 16 }}>✦ PAYMENT VERIFICATION ✦</p>
+          <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, letterSpacing: 5, color: 'var(--orange)', marginBottom: 20 }}>✦ PAYMENT VERIFICATION ✦</p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 14 }}>
-            <div style={{ gridColumn: '1/-1' }}>
-              <label style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, color: 'var(--orange)', letterSpacing: 3, marginBottom: 4, display: 'block' }}>TRANSACTION ID / UTR NUMBER *</label>
-              <input 
-                className="vintage-input"
-                style={{ ...INP, zIndex: 10, borderColor: !transId.trim() && error ? 'var(--orange)' : 'rgba(255,225,0,.2)', fontSize: 16, letterSpacing: 1 }} 
-                placeholder="Enter your UPI Transaction ID or UTR" 
-                value={transId} 
-                onChange={e => setTransId(e.target.value)}
-                autoComplete="off"
-              />
-            </div>
-            <div>
-              <label style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, color: 'rgba(245,238,216,.45)', letterSpacing: 3, marginBottom: 4, display: 'block' }}>FULL NAME</label>
-              <input className="vintage-input" style={{ ...INP, opacity: 0.7, background: 'rgba(24,25,109,.3)', zIndex: 5 }} value={payerName} disabled />
-            </div>
-            <div>
-              <label style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, color: 'rgba(245,238,216,.45)', letterSpacing: 3, marginBottom: 4, display: 'block' }}>PHONE</label>
-              <input className="vintage-input" style={{ ...INP, opacity: 0.7, background: 'rgba(24,25,109,.3)', zIndex: 5 }} value={phone} disabled />
-            </div>
-            <div>
-              <label style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, color: 'rgba(245,238,216,.45)', letterSpacing: 3, marginBottom: 4, display: 'block' }}>TICKETS</label>
-              <input className="vintage-input" style={{ ...INP, opacity: 0.7, background: 'rgba(24,25,109,.3)', zIndex: 5 }} value={`${qty} ticket(s) — ₹${totalAmount}`} disabled />
-            </div>
-            <div>
-              <label style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, color: 'var(--orange)', letterSpacing: 3, marginBottom: 4, display: 'block' }}>PAYMENT NOTE (OPTIONAL)</label>
-              <input 
-                className="vintage-input"
-                style={{ ...INP, zIndex: 10 }} 
-                placeholder="Any additional note" 
-                value={payNote} 
-                onChange={e => setPayNote(e.target.value)} 
-                autoComplete="off"
-              />
+          <div style={{ background: 'rgba(24,25,109,.4)', padding: '20px', border: '1px solid rgba(255,225,0,.1)', marginBottom: 20 }}>
+            <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, color: 'var(--orange)', letterSpacing: 3, marginBottom: 16 }}>ENTER TRANSACTION DETAILS</p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 16 }}>
+              <div style={{ gridColumn: '1/-1' }}>
+                <label style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, color: 'var(--orange)', letterSpacing: 3, marginBottom: 4, display: 'block' }}>TRANSACTION ID / UTR NUMBER *</label>
+                <input 
+                  className="vintage-input"
+                  style={{ ...INP, zIndex: 10, borderColor: !transId.trim() && error ? 'var(--orange)' : 'rgba(255,225,0,.2)', fontSize: 16, letterSpacing: 1 }} 
+                  placeholder="Enter the 12-digit UPI Transaction ID" 
+                  value={transId} 
+                  onChange={e => setTransId(e.target.value)}
+                  autoComplete="off"
+                />
+              </div>
+              <div>
+                <label style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, color: 'var(--orange)', letterSpacing: 3, marginBottom: 4, display: 'block' }}>PAYER NAME (AS PER UPI) *</label>
+                <input className="vintage-input" style={{ ...INP, zIndex: 10 }} value={payerName} onChange={e => setPayerName(e.target.value)} />
+              </div>
+              <div>
+                <label style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, color: 'rgba(245,238,216,.45)', letterSpacing: 3, marginBottom: 4, display: 'block' }}>PHONE</label>
+                <input className="vintage-input" style={{ ...INP, opacity: 0.7, background: 'rgba(24,25,109,.3)', zIndex: 5 }} value={phone} disabled />
+              </div>
+              <div>
+                <label style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, color: 'rgba(245,238,216,.45)', letterSpacing: 3, marginBottom: 4, display: 'block' }}>TICKETS</label>
+                <input className="vintage-input" style={{ ...INP, opacity: 0.7, background: 'rgba(24,25,109,.3)', zIndex: 5 }} value={`${qty} TICKET(S) — ₹${totalAmount}`} disabled />
+              </div>
+              <div style={{ gridColumn: '1/-1' }}>
+                <label style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, color: 'var(--orange)', letterSpacing: 3, marginBottom: 4, display: 'block' }}>PAYMENT NOTES (OPTIONAL)</label>
+                <input 
+                  className="vintage-input"
+                  style={{ ...INP, zIndex: 10 }} 
+                  placeholder="Any message for verification" 
+                  value={payNote} 
+                  onChange={e => setPayNote(e.target.value)} 
+                  autoComplete="off"
+                />
+              </div>
             </div>
           </div>
 
@@ -301,34 +304,79 @@ export default function ScreeningCard({ screening: s, index: _i }: { screening: 
         </div>
       )}
 
-      {/* ── STAGE: success ── */}
+      {/* ── STAGE: success — Vintage Ticket ── */}
       {stage === 'success' && (
-        <div style={{ marginTop: 20, borderTop: '1px solid rgba(255,225,0,.12)', paddingTop: 24, textAlign: 'center' }}>
-          <div style={{ fontSize: 40, marginBottom: 12 }}>✦</div>
-          <h3 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 'clamp(24px,4vw,38px)', color: 'var(--yellow)', letterSpacing: 4, textShadow: '2px 2px 0 var(--orange)', marginBottom: 12 }}>
-            PAYMENT DETAILS RECEIVED!
-          </h3>
-          {bookingRef && (
-            <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, color: 'var(--yellow)', letterSpacing: 3, marginBottom: 8 }}>
-              Ref: <span style={{ color: 'var(--cream)', fontSize: 15, fontWeight: 'bold' }}>{bookingRef}</span>
-            </p>
-          )}
-          <div style={{ background: 'rgba(24,25,109,.5)', border: '1px solid rgba(255,225,0,.15)', padding: '16px 24px', maxWidth: 440, margin: '16px auto', textAlign: 'left' }}>
-            {[
-              { icon: '✓', text: 'Your payment details have been received.' },
-              { icon: '⏳', text: 'Your transaction will be verified manually by our team.' },
-              { icon: '🎟', text: 'Ticket confirmation will be sent after verification.' },
-            ].map(({ icon, text }, i) => (
-              <p key={i} style={{ fontFamily: "'Inter',sans-serif", fontSize: 13, color: 'var(--cream)', opacity: 0.75, lineHeight: 1.7, display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                <span style={{ flexShrink: 0, fontSize: 16 }}>{icon}</span>
-                {text}
-              </p>
-            ))}
+        <div style={{ marginTop: 24, textAlign: 'center' }}>
+          <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 10, color: 'var(--orange)', letterSpacing: 5, marginBottom: 20 }}>✦ BOOKING SUCCESSFUL ✦</p>
+          
+          <div style={{ 
+            maxWidth: 600, margin: '0 auto', background: '#e8ddc5', color: '#0a0b35', 
+            position: 'relative', border: '1px solid #c0b080', display: 'flex', flexWrap: 'wrap', 
+            boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+          }}>
+            {/* Perforated holes */}
+            <div style={{ position:'absolute', left:-8, top:'50%', marginTop:-8, width:16, height:16, borderRadius:'50%', background:'var(--navy-deep)', border:'1px solid #c0b080' }} />
+            <div style={{ position:'absolute', right:-8, top:'50%', marginTop:-8, width:16, height:16, borderRadius:'50%', background:'var(--navy-deep)', border:'1px solid #c0b080' }} />
+
+            {/* Main Part */}
+            <div style={{ flex: 1, padding: '24px 32px', textAlign: 'left', borderRight: '2px dashed #b0a070', minWidth:300 }}>
+              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start' }}>
+                <p style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 42, margin: 0, lineHeight: 0.9, color: '#222' }}>PITARA CINEMA</p>
+                <div style={{ textAlign:'right' }}>
+                   <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 11, fontWeight:'bold', margin:0 }}>REF# {bookingRef}</p>
+                   <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, opacity: 0.6, margin:0 }}>{new Date().toLocaleDateString()}</p>
+                </div>
+              </div>
+
+              <div style={{ marginTop: 20, borderTop: '2px solid #222', borderBottom: '2px solid #222', padding: '12px 0' }}>
+                <h4 style={{ fontFamily: "'Oswald',sans-serif", fontSize: 24, margin: 0, textTransform: 'uppercase', letterSpacing: 2 }}>{s.title}</h4>
+                <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 11, margin: '4px 0 0' }}>{s.venue_name} · {s.city}</p>
+              </div>
+
+              <div style={{ display:'flex', gap:28, marginTop: 14 }}>
+                <div>
+                  <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, opacity:0.6, letterSpacing:2 }}>DATE & TIME</p>
+                  <p style={{ fontFamily: "'Oswald',sans-serif", fontSize: 16, margin:0 }}>{s.date} @ {s.time.slice(0,5)}</p>
+                </div>
+                <div>
+                  <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, opacity:0.6, letterSpacing:2 }}>HOLDER</p>
+                  <p style={{ fontFamily: "'Oswald',sans-serif", fontSize: 16, margin:0, textTransform:'uppercase' }}>{payerName}</p>
+                </div>
+                <div>
+                  <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, opacity:0.6, letterSpacing:2 }}>ADMIT</p>
+                  <p style={{ fontFamily: "'Oswald',sans-serif", fontSize: 16, margin:0 }}>{qty} PERSON{qty>1?'S':''}</p>
+                </div>
+                <div style={{ marginLeft: 'auto', textAlign:'right' }}>
+                  <p style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 28, margin:0 }}>₹{totalAmount}</p>
+                </div>
+              </div>
+
+              <div style={{ marginTop: 24, fontSize: 10, opacity: 0.8, fontFamily:"'Inter',sans-serif", fontStyle:'italic' }}>
+                * PLEASE TURN OFF YOUR MOBILE PHONE DURING THE SHOW
+              </div>
+            </div>
+
+            {/* Stub Part */}
+            <div style={{ width: 140, padding: '24px 16px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background:'rgba(0,0,0,0.03)' }}>
+              <div style={{ transform: 'rotate(90deg)', whiteSpace: 'nowrap', position: 'relative', width: 120 }}>
+                <p style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 24, color: '#CC3A00', margin:0, letterSpacing:4 }}>ADMIT {qty}</p>
+              </div>
+              
+              {/* Fake barcode */}
+              <div style={{ height: 100, width: 80, display: 'flex', gap: 2, alignItems: 'flex-end', marginTop: 20 }}>
+                {Array.from({length:18}).map((_,i) => (
+                  <div key={i} style={{ width: Math.random()*4+1, height: '100%', background: '#222' }} />
+                ))}
+              </div>
+              <p style={{ fontSize: 9, fontFamily:"'IBM Plex Mono',monospace", marginTop: 8 }}>#{bookingRef}</p>
+            </div>
           </div>
-          <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 10, color: 'rgba(245,238,216,.4)', letterSpacing: 2, marginTop: 12 }}>
-            Transaction ID: {transId}
+
+          <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 12, color: 'var(--yellow)', marginTop: 24, letterSpacing: 2 }}>
+            (Kindly screenshot this ticket as it cannot be generated again)
           </p>
-          <button className="btn-outline" onClick={reset} style={{ fontSize: 12, marginTop: 20, padding: '10px 24px' }}>Done</button>
+          
+          <button className="btn-outline" onClick={reset} style={{ fontSize: 12, marginTop: 24, padding: '10px 24px' }}>Done</button>
         </div>
       )}
     </div>
