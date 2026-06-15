@@ -2,19 +2,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import type { SubmissionSettings } from '@/app/types'
 
-declare global { interface Window { Razorpay: any } }
-
 const GENRES = ['Drama','Thriller','Comedy','Documentary','Romance','Horror','Action','Animation','Short Film','Experimental','Anthology','Biographical','Social Issue','Art House']
-
-function loadRzp(): Promise<boolean> {
-  return new Promise(res => {
-    if (window.Razorpay) { res(true); return }
-    const s = document.createElement('script')
-    s.src = 'https://checkout.razorpay.com/v1/checkout.js'
-    s.onload = () => res(true); s.onerror = () => res(false)
-    document.body.appendChild(s)
-  })
-}
 
 // ── Field wrapper
 function Field({ label, labelHi, children, required }: { label: string; labelHi?: string; children: React.ReactNode; required?: boolean }) {
@@ -94,31 +82,6 @@ function ImageDropzone({ label, onUpload, preview, multiple }: { label: string; 
   )
 }
 
-// ── Step indicator
-function StepIndicator({ step, total }: { step: number; total: number }) {
-  const labels = ['Film Info', 'Media', 'Contact']
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 0, marginBottom: 40 }}>
-      {labels.map((l, i) => (
-        <div key={i} style={{ display: 'flex', alignItems: 'center', flex: i < total - 1 ? 1 : 'none' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-            <div style={{
-              width: 32, height: 32, border: `2px solid ${i < step ? 'var(--orange)' : i === step ? 'var(--yellow)' : 'rgba(255,225,0,.2)'}`,
-              background: i < step ? 'var(--orange)' : i === step ? 'rgba(255,225,0,.1)' : 'transparent',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontFamily: "'Bebas Neue',sans-serif", fontSize: 14, color: i < step ? '#fff' : i === step ? 'var(--yellow)' : 'rgba(255,225,0,.3)',
-              transition: 'all .3s',
-            }}>
-              {i < step ? '✓' : i + 1}
-            </div>
-            <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 8, letterSpacing: 2, color: i === step ? 'var(--yellow)' : 'rgba(255,225,0,.35)', whiteSpace: 'nowrap' }}>{l.toUpperCase()}</p>
-          </div>
-          {i < total - 1 && <div style={{ flex: 1, height: 1, background: i < step ? 'var(--orange)' : 'rgba(255,225,0,.15)', margin: '-16px 8px 0', transition: 'background .3s' }} />}
-        </div>
-      ))}
-    </div>
-  )
-}
 
 type FormData = {
   title: string; runtime_minutes: string; genres: string[]; director_name: string
@@ -201,7 +164,7 @@ export default function SubmitScreeningSection() {
       ...form,
       runtime_minutes: Number(form.runtime_minutes) || 0,
       release_year:    form.release_year ? Number(form.release_year) : null,
-      fee_paid:        feeRequired ? Number(settings.fee_amount) : 0,
+      fee_paid:        feeRequired ? Number(settings?.fee_amount || 0) : 0,
       payment_payer_name: feeRequired ? form.payment_payer_name : form.submitter_name,
       payment_payer_email: form.submitter_email, // default
     }
