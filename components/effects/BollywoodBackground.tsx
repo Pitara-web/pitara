@@ -18,7 +18,7 @@ interface Sketch {
   vRotation: number
   scale: number
   opacity: number
-  type: 'reel' | 'dancer' | 'star' | 'camera' | 'clapperboard' | 'popcorn'
+  type: 'reel' | 'dancer' | 'star' | 'clapperboard' | 'popcorn'
   size: number
 }
 
@@ -131,33 +131,6 @@ function drawStar(ctx: CanvasRenderingContext2D, x: number, y: number, size: num
   ctx.restore()
 }
 
-function drawCamera(ctx: CanvasRenderingContext2D, x: number, y: number, size: number, opacity: number) {
-  ctx.save()
-  ctx.translate(x, y)
-  ctx.globalAlpha = opacity
-  ctx.strokeStyle = 'rgba(255,140,42,.4)'
-  ctx.lineWidth = 1.5
-  ctx.fillStyle = 'rgba(255,140,42,.08)'
-
-  // Camera body
-  ctx.beginPath()
-  ctx.rect(-size * 0.4, -size * 0.3, size * 0.8, size * 0.6)
-  ctx.stroke()
-  ctx.fill()
-
-  // Lens
-  ctx.beginPath()
-  ctx.arc(0, 0, size * 0.2, 0, Math.PI * 2)
-  ctx.stroke()
-  ctx.fill()
-
-  // Viewfinder
-  ctx.beginPath()
-  ctx.rect(-size * 0.15, -size * 0.25, size * 0.3, size * 0.2)
-  ctx.stroke()
-
-  ctx.restore()
-}
 
 function drawClapperboard(ctx: CanvasRenderingContext2D, x: number, y: number, size: number, opacity: number, rotation: number) {
   ctx.save()
@@ -240,7 +213,7 @@ export default function BollywoodBackground() {
       cv.height = window.innerHeight
 
       sketches.length = 0
-      const types: Array<Sketch['type']> = ['reel', 'dancer', 'star', 'camera', 'clapperboard', 'popcorn']
+      const types: Array<Sketch['type']> = ['reel', 'dancer', 'star', 'clapperboard', 'popcorn']
 
       for (let i = 0; i < 12; i++) {
         sketches.push({
@@ -287,9 +260,6 @@ export default function BollywoodBackground() {
             break
           case 'star':
             drawStar(ctx, sketch.x, sketch.y, sketch.size, sketch.opacity)
-            break
-          case 'camera':
-            drawCamera(ctx, sketch.x, sketch.y, sketch.size, sketch.opacity)
             break
           case 'clapperboard':
             drawClapperboard(ctx, sketch.x, sketch.y, sketch.size, sketch.opacity, sketch.rotation)

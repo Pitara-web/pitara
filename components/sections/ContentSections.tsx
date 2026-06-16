@@ -47,15 +47,15 @@ export function AboutSection() {
       {/* watermark */}
       <div aria-hidden style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Bebas Neue',sans-serif", fontSize: 'clamp(70px,18vw,220px)', color: 'rgba(255,225,0,.02)', whiteSpace: 'nowrap', letterSpacing: '.04em', pointerEvents: 'none', userSelect: 'none' }}>CINEMA</div>
 
-      <div style={{ maxWidth: 860, width: '100%', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: 860, width: '100%', position: 'relative', zIndex: 1, textAlign: 'center' }}>
         <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 10, letterSpacing: 7, color: 'var(--orange)', marginBottom: 14 }}>✦ WHO WE ARE ✦</p>
-        <h2 className="wobble" style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 'clamp(40px,7vw,88px)', color: 'var(--yellow)', lineHeight: 1, textShadow: '3px 3px 0 var(--orange)', marginBottom: 40 }}>
+        <h2 className="wobble" style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 'clamp(40px,7vw,88px)', color: 'var(--yellow)', lineHeight: 1, textShadow: '3px 3px 0 var(--orange)', marginBottom: 40, marginLeft: 'auto', marginRight: 'auto' }}>
           THE HIDDEN<br />CINEMA
         </h2>
 
         <div className="about-lines" style={{ marginBottom: 48 }}>
           {ABOUT_LINES.map((l, i) => (
-            <p key={i} className="about-line" style={{ fontFamily: l.font, fontWeight: l.w, fontSize: l.sz, color: l.col, lineHeight: 1.45, marginBottom: l.mb, paddingLeft: l.pl, borderLeft: l.bl, opacity: .95, textTransform: i >= 4 ? 'uppercase' : 'none' }}>
+            <p key={i} className="about-line" style={{ fontFamily: l.font, fontWeight: l.w, fontSize: l.sz, color: l.col, lineHeight: 1.45, marginBottom: l.mb, paddingLeft: l.pl, borderLeft: l.bl, opacity: .95, textTransform: i >= 4 ? 'uppercase' : 'none', textAlign: i < 4 ? 'center' : 'left', marginInline: i < 4 ? 'auto' : '0' }}>
               {l.text}
             </p>
           ))}

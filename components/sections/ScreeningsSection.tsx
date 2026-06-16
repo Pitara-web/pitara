@@ -64,10 +64,29 @@ export default function ScreeningsSection() {
     <section ref={sectionRef} id="screenings" style={{ minHeight:'100vh', background:'var(--navy-deep)', padding:'80px 0 60px', position:'relative', overflow:'hidden' }}>
       <div style={{ height:24, backgroundImage:'repeating-linear-gradient(90deg,transparent,transparent 20px,var(--navy-dark) 20px,var(--navy-dark) 26px)', backgroundColor:'var(--yellow)' }} />
 
-      {/* floating dialogue */}
-      <div style={{ position:'sticky', top:100, zIndex:210, pointerEvents:'none', display:'flex', justifyContent:'flex-end', paddingRight:'clamp(16px,4vw,60px)', marginBottom:24 }}>
-        <div style={{ background:'rgba(204,58,0,.15)', border:'1px solid rgba(204,58,0,.4)', padding:'10px 18px', maxWidth:280, backdropFilter:'blur(4px)', opacity:dlgVis?1:0, transform:dlgVis?'translateY(0)':'translateY(10px)', transition:'opacity .5s ease, transform .5s ease' }}>
-          <p style={{ fontFamily:"'Oswald',sans-serif", fontStyle:'italic', fontSize:12, color:'var(--cream)', letterSpacing:1, lineHeight:1.5 }}>
+      {/* floating dialogue - adjusted for mobile to avoid overlap */}
+      <div style={{ 
+        position: 'relative', 
+        zIndex: 210, 
+        pointerEvents: 'none', 
+        display: 'flex', 
+        justifyContent: 'center', 
+        padding: '0 16px', 
+        marginTop: -20,
+        marginBottom: 32 
+      }} className="md:sticky md:top-24 md:justify-end md:mt-0 md:pr-[clamp(16px,4vw,60px)]">
+        <div style={{ 
+          background: 'rgba(204,58,0,.15)', 
+          border: '1px solid rgba(204,58,0,.4)', 
+          padding: '10px 18px', 
+          maxWidth: 280, 
+          backdropFilter: 'blur(4px)', 
+          opacity: dlgVis ? 1 : 0, 
+          transform: dlgVis ? 'translateY(0)' : 'translateY(10px)', 
+          transition: 'opacity .5s ease, transform .5s ease',
+          textAlign: 'center'
+        }} className="md:text-left">
+          <p style={{ fontFamily: "'Oswald',sans-serif", fontStyle: 'italic', fontSize: 12, color: 'var(--cream)', letterSpacing: 1, lineHeight: 1.5 }}>
             &ldquo;{DIALOGUES[dlgIdx]}&rdquo;
           </p>
         </div>
