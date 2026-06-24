@@ -4,7 +4,7 @@ if (process.env.SENDGRID_API_KEY) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 }
 
-const FROM_EMAIL = 'khula.pitara0@gmail.com'; // Use the email you verify as a Single Sender in SendGrid
+const FROM_EMAIL = 'mrnuke567@gmail.com'; // Use the email you verify as a Single Sender in SendGrid
 
 /**
  * Sends a confirmation email to the user when they submit a film.
